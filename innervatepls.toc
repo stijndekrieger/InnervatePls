@@ -1,0 +1,10 @@
+## Interface: 11304
+## Title: InnervatePls
+## Notes: An addon to communicate innervate usage.
+## Author: Melagan
+## Version: 1.0
+## DefaultState: enabled
+
+
+innervatepls.lua
+innervatepls.xml
