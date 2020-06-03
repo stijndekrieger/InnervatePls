@@ -14,8 +14,8 @@
         </Size>
 
         <ResizeBounds>
-            <minResize x="35" y="35"/>
-            <maxResize x="250" y="250"/>
+            <minResize x="45" y="45"/>
+            <maxResize x="300" y="300"/>
         </ResizeBounds>
    
         <Backdrop   bgFile="Interface\Tooltips\UI-Tooltip-Background"
@@ -67,6 +67,42 @@
                 </Scripts>
 
             </Button>
+
+            <Button name="$parent_Resize_Button" parent="InnervatePlsButtonFrame" >
+            
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="-3" y="3"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+
+                <NormalTexture file="Interface\MINIMAP\TRACKING\OBJECTICONS">
+                    <TexCoords left="0" right="0.125" top="0" bottom="0.5"/>
+                </NormalTexture>
+
+                <HighlightTexture file="Interface\MINIMAP\TRACKING\OBJECTICONS">
+                    <TexCoords left="0.125" right="0.25" top="0" bottom="0.5"/>
+                </HighlightTexture>
+
+                <Scripts>
+                    <OnUpdate>
+                        InnervatePls_ButtonFrame_Resize_Button_OnUpdate()
+                    </OnUpdate>
+
+                    <OnMouseDown>
+                        InnervatePls_ButtonFrame_Resize_Button_OnMouseDown()
+                    </OnMouseDown>
+
+                    <OnMouseUp>
+                        InnervatePls_ButtonFrame_Resize_Button_OnMouseUp()
+                    </OnMouseUp>
+                </Scripts>
+
+
+
+            </Button>
             
         </Frames>
 
@@ -82,6 +118,10 @@
             <OnUpdate>
                 InnervatePls_ButtonFrame_OnUpdate()
             </OnUpdate>  
+
+            <OnLoad>
+                InnervatePls_ButtonFrame_OnLoad()
+            </OnLoad>
         </Scripts>
 
     </Frame>
