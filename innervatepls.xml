@@ -126,4 +126,106 @@
 
     </Frame>
 
+    <Frame  name = "InnervatePlsButtonFrame_Druid" parent="UIParent"
+            enableMouse="true"
+            movable="true"
+            resizable="true"
+    >
+        <Anchors>
+            <Anchor point="CENTER">
+                <Offset x="-120" y="150"/>
+            </Anchor>
+        </Anchors>
+
+        <Size>
+            <AbsDimension x="150" y="100"/>
+        </Size> 
+
+        <Backdrop   bgFile="Interface\Tooltips\UI-Tooltip-Background"
+                    edgeFile="Interface\Tooltips\UI-Tooltip-Border"
+                    tile="true"
+        >
+
+            <EdgeSize>
+                <AbsValue val="16"/>
+            </EdgeSize>
+            
+            
+            <TileSize>
+                <AbsValue val="16"/>
+            </TileSize>
+
+            <BackgroundInsets>
+                <AbsInset left="4" right="3" top="4" bottom="3"/>
+            </BackgroundInsets>
+
+        </Backdrop> 
+        
+        <Frames>
+            <Button name="$parent_Green_Button" parent="InnervatePlsButtonFrame_Druid">
+
+                <Size>
+                    <AbsDimension x="50" y="50"/>
+                </Size> 
+
+                <Anchors>
+                    <Anchor point="CENTER">
+                        <Offset x="-25" y="0"/>
+                    </Anchor>
+                </Anchors>
+
+                <NormalTexture file="Interface\Icons\spell_nature_lightning">
+                    <Color  r="0" b="0" g="1"/>
+                </NormalTexture>
+
+                <HighlightTexture file="Interface\Icons\spell_nature_lightning">
+                    <Color  a="0.4"/>
+                </HighlightTexture>
+
+                <Scripts>
+                    <OnClick>
+                        InnervatePlsButtonFrame_Druid_Green_Button_OnClick()
+                    </OnClick>
+                </Scripts>
+
+            </Button>
+
+            <Button name="$parent_Red_Button" parent="InnervatePlsButtonFrame_Druid">
+
+                <Size>
+                    <AbsDimension x="50" y="50"/>
+                </Size> 
+
+                <Anchors>
+                    <Anchor point="CENTER">
+                        <Offset x="25" y="0"/>
+                    </Anchor>
+                </Anchors>
+
+                <NormalTexture file="Interface\Icons\spell_nature_lightning">
+                    <Color  r="1" b="0" g="0"/>
+                </NormalTexture>
+
+                <HighlightTexture file="Interface\Icons\spell_nature_lightning">
+                    <Color  a="0.4"/>
+                </HighlightTexture>
+
+                <Scripts>
+                    <OnClick>
+                        InnervatePlsButtonFrame_Druid_Red_Button_OnClick()
+                    </OnClick>
+                </Scripts>
+
+            </Button>
+        </Frames>
+
+        <Scripts>
+
+            <OnLoad>
+                InnervatePlsButtonFrame_Druid_OnLoad()
+            </OnLoad>
+
+        </Scripts>
+    </Frame>
+
 </Ui>

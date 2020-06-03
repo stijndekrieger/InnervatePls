@@ -46,7 +46,24 @@ function InnervatePls_Button_OnUpdate()
    InnervatePlsButtonFrame_Button:SetHeight(35 * InnervatePls_Button_Height_Scale)
 end
 
-function InnervatePls_Button_OnClick()
-   InnervatePls_Class = UnitClass("player")
-   print("You are a " .. InnervatePls_Class)
+function InnervatePls_Button_OnClick() 
+   InnervatePlsButtonFrame_Druid:Show()
+    print("I WANT INNERVATE")
+   print(UnitPower("player", mana)/UnitPowerMax("player", mana)*100 .."%")
+   print(UnitClass("player"))
+   print(UnitName("player"))
+end
+
+function InnervatePlsButtonFrame_Druid_OnLoad()
+   InnervatePlsButtonFrame_Druid:Hide()
+end
+
+function InnervatePlsButtonFrame_Druid_Green_Button_OnClick()
+   InnervatePlsButtonFrame_Druid:Hide()
+   print("THERE YOU GO")
+end
+
+function InnervatePlsButtonFrame_Druid_Red_Button_OnClick()
+   InnervatePlsButtonFrame_Druid:Hide()
+   print("NONONONO")
 end
