@@ -18,7 +18,7 @@
             <maxResize x="300" y="300"/>
         </ResizeBounds>
    
-        <Backdrop   bgFile="Interface\Tooltips\UI-Tooltip-Background"
+        <Backdrop   bgFile="Interface\TutorialFrame\TutorialFrameBackground"
                     edgeFile="Interface\Tooltips\UI-Tooltip-Border"
                     tile="true"
         >
@@ -56,10 +56,6 @@
                     <OnClick>
                         InnervatePls_Button_OnClick()
                     </OnClick>
-
-                    <OnLoad>
-                        InnervatePls_Button_OnLoad()
-                    </OnLoad>
 
                     <OnUpdate>
                         InnervatePls_Button_OnUpdate()
@@ -141,7 +137,7 @@
             <AbsDimension x="150" y="100"/>
         </Size> 
 
-        <Backdrop   bgFile="Interface\Tooltips\UI-Tooltip-Background"
+        <Backdrop   bgFile="Interface\TutorialFrame\TutorialFrameBackground"
                     edgeFile="Interface\Tooltips\UI-Tooltip-Border"
                     tile="true"
         >

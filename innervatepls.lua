@@ -1,14 +1,43 @@
 innervatepls = { } 
 
-SLASH_INNERVATEPLS1 = "/innervatepls"
-SLASH_INNERVATEPLS2 = "/ipls"
-SlashCmdList["INNERVATEPLS"] = function(msg)
-   print("Chat Command Working")
-   
+InnervatePls_Frame_Locked = false
+InnervatePls_Frame_Hidden = false
+
+SLASH_INNERVATEPLSTEST1 = "/innervatepls"
+SLASH_INNERVATEPLSTEST2 = "/ipls"
+SlashCmdList["INNERVATEPLSTEST"] = function(msg)
+   if msg == "lock" then
+      InnervatePlsButtonFrame_Resize_Button:Hide()
+      InnervatePlsButtonFrame:SetBackdrop(nil)
+      InnervatePls_Frame_Locked = true
+   elseif msg == "unlock" then
+      InnervatePlsButtonFrame_Resize_Button:Show()
+      InnervatePls_Frame_Locked = false
+      InnervatePlsButtonFrame:SetBackdrop( { 
+         bgFile = [[Interface\TutorialFrame\TutorialFrameBackground]], 
+         edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]], tile = true, tileSize = 16, edgeSize = 16, 
+         insets = { left = 4, right = 3, top = 4, bottom = 3 }
+       });
+   elseif msg == "toggle" then
+      print("Toggle button")
+      if InnervatePls_Frame_Hidden == false then 
+         InnervatePlsButtonFrame:Hide() 
+         InnervatePls_Frame_Hidden = true
+      else 
+         InnervatePlsButtonFrame:Show() 
+         InnervatePls_Frame_Hidden = false
+      end
+   else
+      print("|cff00ccffInnervatePls Version 1.0 Loaded|r")
+      print("|cffff0000This is an early test version|r")
+      print("Type '/ipls lock' to lock the button")
+      print("Type '/ipls unlock' to unlock the button")
+      print("Type '/ipls toggle' to hide/show the button")
+   end
 end
 
 function InnervatePls_ButtonFrame_OnMouseDown() 
-   InnervatePlsButtonFrame:StartMoving()
+   if  InnervatePls_Frame_Locked == false then InnervatePlsButtonFrame:StartMoving() end
 end
 
 function InnervatePls_ButtonFrame_OnMouseUp()
@@ -20,7 +49,7 @@ function InnervatePls_ButtonFrame_OnUpdate()
 end
 
 function InnervatePls_ButtonFrame_OnLoad()
-   InnervatePlsButtonFrame_Button:SetClampedToScreen(true)
+   InnervatePlsButtonFrame:SetClampedToScreen(true)
    print("|cff00ccffInnervatePls loaded - /ipls|r")
 end
 
@@ -48,10 +77,8 @@ end
 
 function InnervatePls_Button_OnClick() 
    InnervatePlsButtonFrame_Druid:Show()
-    print("I WANT INNERVATE")
-   print(UnitPower("player", mana)/UnitPowerMax("player", mana)*100 .."%")
-   print(UnitClass("player"))
-   print(UnitName("player"))
+   InnervatePls_Percent_Mana = string.format ("%.1f%%",UnitPower("player", mana)/UnitPowerMax("player", mana)*100)
+   print(UnitClass("player").." ".. UnitName("player").." with "..InnervatePls_Percent_Mana.." Mana wants Innervate")
 end
 
 function InnervatePlsButtonFrame_Druid_OnLoad()
@@ -60,10 +87,10 @@ end
 
 function InnervatePlsButtonFrame_Druid_Green_Button_OnClick()
    InnervatePlsButtonFrame_Druid:Hide()
-   print("THERE YOU GO")
+   print("Innervate Given")
 end
 
 function InnervatePlsButtonFrame_Druid_Red_Button_OnClick()
    InnervatePlsButtonFrame_Druid:Hide()
-   print("NONONONO")
+   print("Innervate Canceled")
 end
