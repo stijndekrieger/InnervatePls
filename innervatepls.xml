@@ -1,9 +1,9 @@
 <Ui>
+
     <Frame  name = "InnervatePlsButtonFrame" parent="UIParent"
             enableMouse="true"
             movable="true"
-            resizable="true"
-    >
+            resizable="true">
 
         <Anchors>
             <Anchor point="CENTER"/>
@@ -103,6 +103,7 @@
         </Frames>
 
         <Scripts>
+
             <OnMouseDown>
                 InnervatePls_ButtonFrame_OnMouseDown()
             </OnMouseDown>
@@ -118,6 +119,7 @@
             <OnLoad>
                 InnervatePls_ButtonFrame_OnLoad()
             </OnLoad>
+
         </Scripts>
 
     </Frame>
@@ -126,6 +128,7 @@
             enableMouse="true"
             movable="true"
             resizable="true"
+   
     >
         <Anchors>
             <Anchor point="CENTER">
@@ -134,13 +137,12 @@
         </Anchors>
 
         <Size>
-            <AbsDimension x="150" y="100"/>
+            <AbsDimension x="175" y="115"/>
         </Size> 
 
         <Backdrop   bgFile="Interface\TutorialFrame\TutorialFrameBackground"
                     edgeFile="Interface\Tooltips\UI-Tooltip-Border"
-                    tile="true"
-        >
+                    tile="true">
 
             <EdgeSize>
                 <AbsValue val="16"/>
@@ -158,7 +160,8 @@
         </Backdrop> 
         
         <Frames>
-            <Button name="$parent_Green_Button" parent="InnervatePlsButtonFrame_Druid">
+
+            <Button name="$parent_Green_Button" parent="InnervatePlsButtonFrame_Druid" inherits="SecureActionButtonTemplate">
 
                 <Size>
                     <AbsDimension x="50" y="50"/>
@@ -166,7 +169,7 @@
 
                 <Anchors>
                     <Anchor point="CENTER">
-                        <Offset x="-25" y="0"/>
+                        <Offset x="-25" y="-25"/>
                     </Anchor>
                 </Anchors>
 
@@ -178,11 +181,18 @@
                     <Color  a="0.4"/>
                 </HighlightTexture>
 
+
+                <Attributes>
+                    <Attribute name="type" value="spell" />
+                    <Attribute name="spell" value= "Flash Heal(Rank 1)"/>
+                    <Attribute name="target" value= "target"/>
+                </Attributes>
+                
                 <Scripts>
-                    <OnClick>
-                        InnervatePlsButtonFrame_Druid_Green_Button_OnClick()
-                    </OnClick>
-                </Scripts>
+                    <PostClick>
+                        InnervatePlsButtonFrame_Druid_Green_Button_PostClick()
+                    </PostClick>
+                </Scripts> 
 
             </Button>
 
@@ -194,7 +204,7 @@
 
                 <Anchors>
                     <Anchor point="CENTER">
-                        <Offset x="25" y="0"/>
+                        <Offset x="25" y="-25"/>
                     </Anchor>
                 </Anchors>
 
@@ -213,7 +223,59 @@
                 </Scripts>
 
             </Button>
+
         </Frames>
+
+        <Layers>
+             <Layer level ="ARTWORK">
+
+                <FontString name="$parent_Mana_Text"
+                            inherits="SystemFont_Large"
+                            text="0"
+                            justifyV="TOP"
+                            justifyH="RIGHT">
+
+                    <Size>
+                        <AbsDimension x="0" y="10"/>
+                    </Size>
+
+                    <Anchors>
+                        <Anchor point="CENTER">
+                            <Offset>
+                                <AbsDimension x="0" y="20"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+
+                    <Color r="0.1" g="0.6" b="1" a="0.9"/>
+
+                </FontString>
+
+                <FontString name="$parent_Class_Text"
+                            inherits="SystemFont_Large"
+                            text="0"
+                            justifyV="TOP"
+                            justifyH="RIGHT">
+
+                    <Size>
+                        <AbsDimension x="0" y="10"/>
+                    </Size>
+
+                    <Anchors>
+                        <Anchor point="CENTER">
+                            <Offset>
+                                <AbsDimension x="0" y="40"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+
+                    <Color r="1" g="1" b="1"/>
+
+                </FontString>
+
+            </Layer>
+
+        </Layers>
 
         <Scripts>
 

@@ -23,6 +23,8 @@ SlashCmdList["INNERVATEPLSTEST"] = function(msg)
       if InnervatePls_Frame_Hidden == false then 
          InnervatePlsButtonFrame:Hide() 
          InnervatePls_Frame_Hidden = true
+         print(InnervatePls_Frame_Locked)
+         
       else 
          InnervatePlsButtonFrame:Show() 
          InnervatePls_Frame_Hidden = false
@@ -77,20 +79,27 @@ end
 
 function InnervatePls_Button_OnClick() 
    InnervatePlsButtonFrame_Druid:Show()
-   InnervatePls_Percent_Mana = string.format ("%.1f%%",UnitPower("player", mana)/UnitPowerMax("player", mana)*100)
-   print(UnitClass("player").." ".. UnitName("player").." with "..InnervatePls_Percent_Mana.." Mana wants Innervate")
+   InnervatePls_Percent_Mana = string.format ("%.0f%%",UnitPower("player", mana)/UnitPowerMax("player", mana)*100)
+   InnervatePlsButtonFrame_Druid_Mana_Text:SetText(InnervatePls_Percent_Mana)
+   InnervatePlsButtonFrame_Druid_Class_Text:SetText(UnitName("player"))
+   if UnitClass("player") == "Druid" then InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(1,0.49,0.04)
+   elseif UnitClass("player") == "Paladin" then InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(0.96, 0.55, 0.73)
+   elseif UnitClass("player") == "Shaman" then InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(0, 0.44, 0.87)
+   else InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(1,1,1)
+   end
 end
 
 function InnervatePlsButtonFrame_Druid_OnLoad()
    InnervatePlsButtonFrame_Druid:Hide()
 end
 
-function InnervatePlsButtonFrame_Druid_Green_Button_OnClick()
+function InnervatePlsButtonFrame_Druid_Green_Button_PostClick()
    InnervatePlsButtonFrame_Druid:Hide()
-   print("Innervate Given")
 end
 
 function InnervatePlsButtonFrame_Druid_Red_Button_OnClick()
    InnervatePlsButtonFrame_Druid:Hide()
    print("Innervate Canceled")
 end
+
+
