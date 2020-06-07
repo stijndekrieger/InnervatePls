@@ -94,9 +94,8 @@
                     <OnMouseUp>
                         InnervatePls_ButtonFrame_Resize_Button_OnMouseUp()
                     </OnMouseUp>
+
                 </Scripts>
-
-
 
             </Button>
             
@@ -282,6 +281,18 @@
             <OnLoad>
                 InnervatePlsButtonFrame_Druid_OnLoad()
             </OnLoad>
+
+            <OnUpdate>
+                InnervatePlsButtonFrame_Druid_OnUpdate()
+            </OnUpdate>
+
+            <OnMouseDown>
+                InnervatePlsButtonFrame_Druid_OnMouseDown()
+            </OnMouseDown>
+
+            <OnMouseUp>
+                InnervatePlsButtonFrame_Druid_OnMouseUp()
+            </OnMouseUp>
 
         </Scripts>
     </Frame>
