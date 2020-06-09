@@ -7,5 +7,5 @@
 ## SavedVariablesPerCharacter: InnervatePls_Frame_Locked, InnervatePls_Frame_Hidden
 
 
-innervatepls.lua
-innervatepls.xml
+InnervatePls.lua
+InnervatePls.xml
