@@ -116,9 +116,13 @@
             </OnUpdate>  
 
             <OnLoad>
-                InnervatePls_ButtonFrame_OnLoad()
+                self:RegisterEvent("CHAT_MSG_ADDON")
+                self:RegisterEvent("ADDON_LOADED")
             </OnLoad>
 
+            <OnEvent>
+                InnervatePls_ButtonFrame_OnEvent(event, ...)
+            </OnEvent>
         </Scripts>
 
     </Frame>
