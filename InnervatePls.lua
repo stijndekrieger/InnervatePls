@@ -24,7 +24,6 @@ SlashCmdList["INNERVATEPLSTEST"] = function(msg)
          InnervatePlsButtonFrame:Show() 
          InnervatePls_Frame_Hidden = false
       end
-   -- elseif msg == "test" then 
 
    else
       print("|cff00ccffInnervatePls Version 1.0 Loaded|r")
@@ -67,6 +66,8 @@ function InnervatePls_ButtonFrame_OnUpdate()
 end
 
 function InnervatePls_ButtonFrame_OnEvent(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17)
+
+   -- If the addon is loaded
    if event == "ADDON_LOADED" and arg1 == "InnervatePls" then
       InnervatePlsButtonFrame:SetClampedToScreen(true)
       print("|cff00ccffInnervatePls loaded - /ipls|r")
@@ -74,26 +75,18 @@ function InnervatePls_ButtonFrame_OnEvent(event, arg1, arg2, arg3, arg4, arg5, a
       InnervatePls_Button_Height_Scale = InnervatePlsButtonFrame:GetHeight() / 75
       C_Timer.After(0.05,InnervatePls_Timer_Resize_Button)
       C_ChatInfo.RegisterAddonMessagePrefix("INNERVATEPLS")
+
+   -- If a message from the addon is received
    elseif event == "CHAT_MSG_ADDON" and arg1 == "INNERVATEPLS" then
-      print("RECEIVED MESSAGE FROM INNERVATEPLS: ")
-      print("arg1 - prefix: \"" .. arg1 .. "\"")
-      print("arg2 - text: \"" .. arg2 .. "\"")
-      print("arg3 - channel: \"" .. arg3 .. "\"")
-      print("arg4 - sender: \"" .. arg4 .. "\"")
-      print("arg5 - target: \"" .. arg5 .. "\"")
-      print("arg6 - zoneChannelID: \"" .. arg6 .. "\"")
-      print("arg7 - localID: \"" .. arg7 .. "\"")
-      print("arg8 - name: \"" .. arg8 .. "\"")
-      print("arg9 - instanceID: \"" .. arg9 .. "\"")
--- 1. prefix 
--- 2. text 
--- 3. channel 
--- 4. sender 
--- 5. target 
--- 6. zoneChannelID 
--- 7. localID 
--- 8. name 
--- 9. instanceID 
+      message = arg2
+      from = arg4
+
+      -- Remove servername from target
+      if string.find(from, "-") then
+         from = string.sub(from, 0, string.find(arg4, "-")-1);
+      end
+
+      InnervatePls_HandleAddonMsg(message, from)
    end
 end
 
@@ -129,18 +122,7 @@ function InnervatePls_Button_OnUpdate()
 end
 
 function InnervatePls_Button_OnClick()
-   InnervatePls_SendAddonMsg(UnitName("player") .. " wants innervate")
-
-   -- TO-DO: move code below to the function where the druid receives the addon message
-   --
-   -- InnervatePlsButtonFrame_Druid_Mana_Check = true 
-   -- InnervatePlsButtonFrame_Druid:Show()
-   -- InnervatePlsButtonFrame_Druid_Class_Text:SetText(UnitName("player"))
-   -- if UnitClass("player") == "Druid" then InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(1,0.49,0.04)
-   -- elseif UnitClass("player") == "Paladin" then InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(0.96, 0.55, 0.73)
-   -- elseif UnitClass("player") == "Shaman" then InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(0, 0.44, 0.87)
-   -- else InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(1,1,1)
-   -- end
+   InnervatePls_SendAddonMsg("InnervateRequest;" .. UnitName("player"))
 end
 
 function InnervatePlsButtonFrame_Druid_OnLoad()
@@ -148,8 +130,8 @@ function InnervatePlsButtonFrame_Druid_OnLoad()
 end
 
 function InnervatePlsButtonFrame_Druid_OnUpdate()
-   if InnervatePlsButtonFrame_Druid_Mana_Check == true then
-      InnervatePls_Percent_Mana = string.format ("%.0f%%",UnitPower("player", mana)/UnitPowerMax("player", mana)*100)
+   if InnervatePlsButtonFrame_Druid_Mana_Check ~= false then
+      InnervatePls_Percent_Mana = string.format ("%.0f%%",UnitPower(InnervatePlsButtonFrame_Druid_Mana_Check, mana)/UnitPowerMax(InnervatePlsButtonFrame_Druid_Mana_Check, mana)*100)
       InnervatePlsButtonFrame_Druid_Mana_Text:SetText(InnervatePls_Percent_Mana)
    end
 end
@@ -178,5 +160,17 @@ function InnervatePls_SendAddonMsg(message)
 	if IsInRaid("player") then
 		C_ChatInfo.SendAddonMessage("INNERVATEPLS", message, "RAID")
 	elseif GetNumGroupMembers() > 0 then
-		C_ChatInfo.SendAddonMessage("INNERVATEPLS", message, "PARTY")
+      C_ChatInfo.SendAddonMessage("INNERVATEPLS", message, "PARTY")
+   end
+end
+
+function InnervatePls_HandleAddonMsg(message, from)
+   InnervatePlsButtonFrame_Druid_Mana_Check = from 
+   InnervatePlsButtonFrame_Druid:Show()
+   InnervatePlsButtonFrame_Druid_Class_Text:SetText(from)
+   if UnitClass("player") == "Druid" then InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(1,0.49,0.04)
+   elseif UnitClass("player") == "Paladin" then InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(0.96, 0.55, 0.73)
+   elseif UnitClass("player") == "Shaman" then InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(0, 0.44, 0.87)
+   else InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(1,1,1)
+   end
 end
