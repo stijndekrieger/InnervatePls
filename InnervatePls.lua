@@ -80,7 +80,6 @@ function InnervatePls_ButtonFrame_OnEvent(event, arg1, arg2, arg3, arg4, arg5, a
       print("|cff00ccffInnervatePls loaded - /ipls|r")
       InnervatePls_Button_Width_Scale = InnervatePlsButtonFrame:GetWidth() / 75
       InnervatePls_Button_Height_Scale = InnervatePlsButtonFrame:GetHeight() / 75
-      C_Timer.After(0.05,InnervatePls_Timer_Resize_Button)
       C_ChatInfo.RegisterAddonMessagePrefix("INNERVATEPLS")
 
    -- If a message from the addon is received
@@ -97,28 +96,22 @@ function InnervatePls_ButtonFrame_OnEvent(event, arg1, arg2, arg3, arg4, arg5, a
    end
 end
 
-function InnervatePls_Timer_Resize_Button()
-   InnervatePlsButtonFrame_Resize_Button:SetWidth(25 * InnervatePls_Button_Width_Scale)
-   InnervatePlsButtonFrame_Resize_Button:SetHeight(25 * InnervatePls_Button_Height_Scale)
-end
-
 function InnervatePls_ButtonFrame_Resize_Button_OnUpdate()
    if InnervatePlsButtonFrame_Make_Square == true then
       InnervatePlsButtonFrame:SetHeight(InnervatePlsButtonFrame:GetWidth())
-      InnervatePlsButtonFrame_Resize_Button:SetWidth(25 * InnervatePls_Button_Width_Scale)
-      InnervatePlsButtonFrame_Resize_Button:SetHeight(25 * InnervatePls_Button_Height_Scale)
    end
 end
 
 function InnervatePls_ButtonFrame_Resize_Button_OnMouseDown()
    InnervatePlsButtonFrame:StartSizing()
    InnervatePlsButtonFrame_Make_Square = true
-
+   InnervatePlsButtonFrame_Resize_Button:SetHighlightTexture(nil)
 end
 
 function InnervatePls_ButtonFrame_Resize_Button_OnMouseUp()
    InnervatePlsButtonFrame:StopMovingOrSizing()
    InnervatePlsButtonFrame_Make_Square = false
+   InnervatePlsButtonFrame_Resize_Button:SetHighlightTexture("Interface\\CHATFRAME\\UI-ChatIM-SizeGrabber-Highlight")
 end
 
 function InnervatePls_Button_OnUpdate()

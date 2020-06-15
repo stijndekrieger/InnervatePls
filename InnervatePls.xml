@@ -66,38 +66,23 @@
             </Button>
 
             <Button name="$parent_Resize_Button" parent="InnervatePlsButtonFrame" >
-            
+                <Size><AbsDimension x="16" y="16" /></Size>
+
                 <Anchors>
-                    <Anchor point="BOTTOMRIGHT">
-                        <Offset>
-                            <AbsDimension x="-3" y="3"/>
-                        </Offset>
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+                        <Offset><AbsDimension x="-2" y="2" /></Offset>
                     </Anchor>
                 </Anchors>
 
-                <NormalTexture file="Interface\MINIMAP\TRACKING\OBJECTICONS">
-                    <TexCoords left="0" right="0.125" top="0" bottom="0.5"/>
-                </NormalTexture>
-
-                <HighlightTexture file="Interface\MINIMAP\TRACKING\OBJECTICONS">
-                    <TexCoords left="0.125" right="0.25" top="0" bottom="0.5"/>
-                </HighlightTexture>
+                <NormalTexture file="Interface\CHATFRAME\UI-ChatIM-SizeGrabber-Up" />
+                <HighlightTexture file="Interface\CHATFRAME\UI-ChatIM-SizeGrabber-Highlight" />
+                <PushedTexture file="Interface\CHATFRAME\UI-ChatIM-SizeGrabber-Down" />
 
                 <Scripts>
-                    <OnUpdate>
-                        InnervatePls_ButtonFrame_Resize_Button_OnUpdate()
-                    </OnUpdate>
-
-                    <OnMouseDown>
-                        InnervatePls_ButtonFrame_Resize_Button_OnMouseDown()
-                    </OnMouseDown>
-
-                    <OnMouseUp>
-                        InnervatePls_ButtonFrame_Resize_Button_OnMouseUp()
-                    </OnMouseUp>
-
+                    <OnUpdate>InnervatePls_ButtonFrame_Resize_Button_OnUpdate()</OnUpdate>
+                    <OnMouseDown>InnervatePls_ButtonFrame_Resize_Button_OnMouseDown()</OnMouseDown>
+                    <OnMouseUp>InnervatePls_ButtonFrame_Resize_Button_OnMouseUp()</OnMouseUp>
                 </Scripts>
-
             </Button>
             
         </Frames>
