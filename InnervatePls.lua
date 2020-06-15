@@ -1,85 +1,9 @@
-SLASH_INNERVATEPLS1 = "/innervatepls"
-SLASH_INNERVATEPLS2 = "/ipls"
-SlashCmdList["INNERVATEPLS"] = function(msg)
-   if msg == "lock" then
-      if InnervatePls_Frame_Locked == true then
-         print("InnervatePls is already locked, type '/ipls unlock' to unlock the frames")
-      else
-         InnervatePlsButtonFrame_Resize_Button:Hide()
-         InnervatePlsButtonFrame:SetBackdrop(nil)
-         InnervatePls_Frame_Locked = true
-      end
-   elseif msg == "unlock" then
-      if InnervatePls_Frame_Locked == true then
-         InnervatePlsButtonFrame_Resize_Button:Show()
-         InnervatePls_Frame_Locked = false
-         InnervatePlsButtonFrame:SetBackdrop( { 
-            bgFile = [[Interface\TutorialFrame\TutorialFrameBackground]], 
-            edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]], tile = true, tileSize = 16, edgeSize = 16, 
-            insets = { left = 4, right = 3, top = 4, bottom = 3 }
-         });
-      else
-         print("InnervatePls is already unlocked, type '/ipls lock' to lock the frames")
-      end
-   elseif msg == "toggle" then
-      if InnervatePls_Frame_Hidden == false then 
-         InnervatePlsButtonFrame:Hide() 
-         InnervatePls_Frame_Hidden = true
-         print("InnervatePls hidden, type '/ipls toggle' to show")
-      else 
-         InnervatePlsButtonFrame:Show() 
-         InnervatePls_Frame_Hidden = false
-      end
-
-   else
-      print("|cff00ccffInnervatePls Version 1.0 Loaded|r")
-      print("|cffff0000This is an early test version|r")
-      print("Type '/ipls lock' to lock the frames")
-      print("Type '/ipls unlock' to unlock the frames")
-      print("Type '/ipls toggle' to hide/show the button")
-   end
-end
-
-function InnervatePls_ButtonFrame_OnMouseDown() 
-   if InnervatePls_Frame_Locked == false then InnervatePlsButtonFrame:StartMoving() end
-end
-
-function InnervatePls_ButtonFrame_OnMouseUp()
-   InnervatePlsButtonFrame:StopMovingOrSizing()
-end
-
-function InnervatePls_ButtonFrame_Initialize()
-   InnervatePlsButtonFrame:SetClampedToScreen(true)
-
-   if InnervatePls_Frame_Hidden == nil then InnervatePls_Frame_Hidden = false end
-   if InnervatePls_Frame_Locked == nil then InnervatePls_Frame_Locked = false end
-
-   if InnervatePls_Frame_Hidden == true then InnervatePlsButtonFrame:Hide()
-   elseif InnervatePls_Frame_Hidden == false then InnervatePlsButtonFrame:Show()
-   end
-
-   if InnervatePls_Frame_Locked == true then       
-         InnervatePlsButtonFrame_Resize_Button:Hide()
-         InnervatePlsButtonFrame:SetBackdrop(nil)
-
-   elseif InnervatePls_Frame_Locked == false then       
-         InnervatePlsButtonFrame_Resize_Button:Show()
-         InnervatePlsButtonFrame:SetBackdrop( { 
-            bgFile = [[Interface\TutorialFrame\TutorialFrameBackground]], 
-            edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]], tile = true, tileSize = 16, edgeSize = 16, 
-            insets = { left = 4, right = 3, top = 4, bottom = 3 }
-         })
-   end
-end
-
 function InnervatePls_ButtonFrame_OnEvent(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17)
 
    -- If the addon is loaded
    if event == "ADDON_LOADED" and arg1 == "InnervatePls" then
-      print("|cff00ccffInnervatePls loaded - /ipls|r")
-      InnervatePls_Button_Width_Scale = InnervatePlsButtonFrame:GetWidth() / 75
-      InnervatePls_Button_Height_Scale = InnervatePlsButtonFrame:GetHeight() / 75
       C_ChatInfo.RegisterAddonMessagePrefix("INNERVATEPLS")
+      print("|cff00ccffInnervatePls loaded - /ipls|r")
       InnervatePls_ButtonFrame_Initialize()
 
    -- If a message from the addon is received
@@ -96,78 +20,46 @@ function InnervatePls_ButtonFrame_OnEvent(event, arg1, arg2, arg3, arg4, arg5, a
    end
 end
 
-function InnervatePls_ButtonFrame_OnSizeChanged()
-   local frame_width = InnervatePlsButtonFrame:GetWidth()
-   local frame_scale = frame_width / 75
-
-   InnervatePlsButtonFrame:SetHeight(frame_width)
-   InnervatePlsButtonFrame_Button:SetWidth(35 * frame_scale)
-   InnervatePlsButtonFrame_Button:SetHeight(35 * frame_scale)
-end
-
-function InnervatePls_ButtonFrame_Resize_Button_OnMouseDown()
-   InnervatePlsButtonFrame:StartSizing()
-   InnervatePlsButtonFrame_Resize_Button:SetHighlightTexture(nil)
-end
-
-function InnervatePls_ButtonFrame_Resize_Button_OnMouseUp()
-   InnervatePlsButtonFrame:StopMovingOrSizing()
-   InnervatePlsButtonFrame_Resize_Button:SetHighlightTexture("Interface\\CHATFRAME\\UI-ChatIM-SizeGrabber-Highlight")
-end
-
 function InnervatePls_Button_OnClick()
    InnervatePls_SendAddonMsg("InnervateRequest;" .. UnitName("player"))
 end
 
-function InnervatePlsButtonFrame_Druid_OnLoad()
-   InnervatePlsButtonFrame_Druid:Hide()
+function InnervatePlsDruidFrame_Green_Button_PostClick()
+   InnervatePlsDruidFrame_Hide()
 end
 
-function InnervatePlsButtonFrame_Druid_OnMouseDown()
-   InnervatePlsButtonFrame_Druid:StartMoving()
-end
-
-function InnervatePlsButtonFrame_Druid_OnMouseUp()
-   InnervatePlsButtonFrame_Druid:StopMovingOrSizing()
-end
-
-function InnervatePlsButtonFrame_Druid_Green_Button_PostClick()
-   InnervatePlsButtonFrame_Druid_Hide()
-end
-
-function InnervatePlsButtonFrame_Druid_Red_Button_OnClick()
+function InnervatePlsDruidFrame_Red_Button_OnClick()
    print("Innervate Canceled")
-   InnervatePlsButtonFrame_Druid_Hide()
+   InnervatePlsDruidFrame_Hide()
 end
 
-function InnervatePlsButtonFrame_Druid_Show(innervate_target)
-   InnervatePlsButtonFrame_Druid_Mana_Target = from
-   InnervatePlsButtonFrame_Druid:SetScript("OnUpdate", InnervatePlsButtonFrame_Druid_UpdateManaText)
-   InnervatePlsButtonFrame_Druid_Class_Text:SetText(innervate_target)
+function InnervatePlsDruidFrame_Show(innervate_target)
+   InnervatePlsDruidFrame_Mana_Target = from
+   InnervatePlsDruidFrame:SetScript("OnUpdate", InnervatePlsDruidFrame_UpdateManaText)
+   InnervatePlsDruidFrame_Class_Text:SetText(innervate_target)
 
    -- Set correct class color
    -- TO-DO: support other classes
-   if UnitClass("player") == "Druid" then InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(1,0.49,0.04)
-   elseif UnitClass("player") == "Paladin" then InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(0.96, 0.55, 0.73)
-   elseif UnitClass("player") == "Shaman" then InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(0, 0.44, 0.87)
-   else InnervatePlsButtonFrame_Druid_Class_Text:SetTextColor(1,1,1)
+   if UnitClass("player") == "Druid" then InnervatePlsDruidFrame_Class_Text:SetTextColor(1,0.49,0.04)
+   elseif UnitClass("player") == "Paladin" then InnervatePlsDruidFrame_Class_Text:SetTextColor(0.96, 0.55, 0.73)
+   elseif UnitClass("player") == "Shaman" then InnervatePlsDruidFrame_Class_Text:SetTextColor(0, 0.44, 0.87)
+   else InnervatePlsDruidFrame_Class_Text:SetTextColor(1,1,1)
    end
 
-   
-   InnervatePlsButtonFrame_Druid:Show()
+   InnervatePlsDruidFrame:Show()
 end
 
-function InnervatePlsButtonFrame_Druid_UpdateManaText()
-   if InnervatePlsButtonFrame_Druid_Mana_Target ~= false then
-      local mana_text = string.format("%.0f%%",UnitPower(InnervatePlsButtonFrame_Druid_Mana_Target, mana)/UnitPowerMax(InnervatePlsButtonFrame_Druid_Mana_Target, mana)*100)
-      InnervatePlsButtonFrame_Druid_Mana_Text:SetText(mana_text)
+function InnervatePlsDruidFrame_UpdateManaText()
+   if InnervatePlsDruidFrame_Mana_Target ~= false then
+      local mana_text = string.format("%.0f%%",UnitPower(InnervatePlsDruidFrame_Mana_Target, mana)/UnitPowerMax(InnervatePlsDruidFrame_Mana_Target, mana)*100)
+      InnervatePlsDruidFrame_Mana_Text:SetText(mana_text)
    end
 end
 
-function InnervatePlsButtonFrame_Druid_Hide()
-   InnervatePlsButtonFrame_Druid:Hide()
-   InnervatePlsButtonFrame_Druid:SetScript("OnUpdate", nil)
-   InnervatePlsButtonFrame_Druid_Mana_Target = false
+function InnervatePlsDruidFrame_Hide()
+   InnervatePlsDruidFrame:Hide()
+   InnervatePlsDruidFrame:SetScript("OnUpdate", nil)
+   InnervatePlsDruidFrame_Mana_Target = false
 end
 
 -- Send an addon message in the correct channel (party or raid) with the correct prefix
@@ -180,5 +72,5 @@ function InnervatePls_SendAddonMsg(message)
 end
 
 function InnervatePls_HandleAddonMsg(message, from)
-   InnervatePlsButtonFrame_Druid_Show(from)
+   InnervatePlsDruidFrame_Show(from)
 end

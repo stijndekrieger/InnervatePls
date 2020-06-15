@@ -1,0 +1,75 @@
+<Ui>
+    <Frame name="InnervatePlsButtonFrame" parent="UIParent" enableMouse="true" movable="true" resizable="true">
+        <Anchors>
+            <Anchor point="CENTER" />
+        </Anchors>
+        <Size>
+            <AbsDimension x="75" y="75" />
+        </Size>
+        <ResizeBounds>
+            <minResize x="45" y="45" />
+            <maxResize x="300" y="300" />
+        </ResizeBounds>
+        <Backdrop bgFile="Interface\TutorialFrame\TutorialFrameBackground" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+            <EdgeSize>
+                <AbsValue val="16" />
+            </EdgeSize>
+            <TileSize>
+                <AbsValue val="16" />
+            </TileSize>
+            <BackgroundInsets>
+                <AbsInset left="4" right="3" top="4" bottom="3" />
+            </BackgroundInsets>
+        </Backdrop>
+        <Frames>
+            <Button name="$parent_Button" parent="InnervatePlsButtonFrame">
+                <Anchors>
+                    <Anchor point="CENTER" />
+                </Anchors>
+                <NormalTexture file="Interface\Icons\spell_nature_lightning" />
+                <HighlightTexture file="Interface\Icons\spell_nature_lightning">
+                    <Color a="0.4" />
+                </HighlightTexture>
+                <Scripts>
+                    <OnClick>
+                        InnervatePls_Button_OnClick()
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button name="$parent_Resize_Button" parent="InnervatePlsButtonFrame">
+                <Size>
+                    <AbsDimension x="16" y="16" />
+                </Size>
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT">
+                        <Offset>
+                            <AbsDimension x="-2" y="2" />
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <NormalTexture file="Interface\CHATFRAME\UI-ChatIM-SizeGrabber-Up" />
+                <HighlightTexture file="Interface\CHATFRAME\UI-ChatIM-SizeGrabber-Highlight" />
+                <PushedTexture file="Interface\CHATFRAME\UI-ChatIM-SizeGrabber-Down" />
+                <Scripts>
+                    <OnMouseDown>InnervatePls_ButtonFrame_Resize_Button_OnMouseDown()</OnMouseDown>
+                    <OnMouseUp>InnervatePls_ButtonFrame_Resize_Button_OnMouseUp()</OnMouseUp>
+                </Scripts>
+            </Button>
+        </Frames>
+        <Scripts>
+            <OnMouseDown>
+                InnervatePls_ButtonFrame_OnMouseDown()
+            </OnMouseDown>
+            <OnMouseUp>
+                InnervatePls_ButtonFrame_OnMouseUp()
+            </OnMouseUp>
+            <OnLoad>
+                self:RegisterEvent("CHAT_MSG_ADDON")
+                self:RegisterEvent("ADDON_LOADED")
+            </OnLoad>
+            <OnEvent>
+                InnervatePls_ButtonFrame_OnEvent(event, ...)
+            </OnEvent>
+        </Scripts>
+    </Frame>
+</Ui>

@@ -6,6 +6,8 @@
 ## DefaultState: enabled
 ## SavedVariablesPerCharacter: InnervatePls_Frame_Locked, InnervatePls_Frame_Hidden
 
+ButtonFrame.xml
+DruidFrame.xml
 
 InnervatePls.lua
-InnervatePls.xml
+Settings.lua
