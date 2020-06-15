@@ -34,9 +34,6 @@
                     <OnClick>
                         InnervatePls_Button_OnClick()
                     </OnClick>
-                    <OnUpdate>
-                        InnervatePls_Button_OnUpdate()
-                    </OnUpdate>
                 </Scripts>
             </Button>
             <Button name="$parent_Resize_Button" parent="InnervatePlsButtonFrame">
@@ -54,7 +51,6 @@
                 <HighlightTexture file="Interface\CHATFRAME\UI-ChatIM-SizeGrabber-Highlight" />
                 <PushedTexture file="Interface\CHATFRAME\UI-ChatIM-SizeGrabber-Down" />
                 <Scripts>
-                    <OnUpdate>InnervatePls_ButtonFrame_Resize_Button_OnUpdate()</OnUpdate>
                     <OnMouseDown>InnervatePls_ButtonFrame_Resize_Button_OnMouseDown()</OnMouseDown>
                     <OnMouseUp>InnervatePls_ButtonFrame_Resize_Button_OnMouseUp()</OnMouseUp>
                 </Scripts>
@@ -67,13 +63,13 @@
             <OnMouseUp>
                 InnervatePls_ButtonFrame_OnMouseUp()
             </OnMouseUp>
-            <OnUpdate>
-                InnervatePls_ButtonFrame_OnUpdate()
-            </OnUpdate>
             <OnLoad>
                 self:RegisterEvent("CHAT_MSG_ADDON")
                 self:RegisterEvent("ADDON_LOADED")
             </OnLoad>
+            <OnSizeChanged>
+                InnervatePls_ButtonFrame_OnSizeChanged()
+            </OnSizeChanged>
             <OnEvent>
                 InnervatePls_ButtonFrame_OnEvent(event, ...)
             </OnEvent>
@@ -179,18 +175,9 @@
             </Layer>
         </Layers>
         <Scripts>
-            <OnLoad>
-                InnervatePlsButtonFrame_Druid_OnLoad()
-            </OnLoad>
-            <OnUpdate>
-                InnervatePlsButtonFrame_Druid_OnUpdate()
-            </OnUpdate>
-            <OnMouseDown>
-                InnervatePlsButtonFrame_Druid_OnMouseDown()
-            </OnMouseDown>
-            <OnMouseUp>
-                InnervatePlsButtonFrame_Druid_OnMouseUp()
-            </OnMouseUp>
+            <OnLoad>InnervatePlsButtonFrame_Druid_OnLoad()</OnLoad>
+            <OnMouseDown>InnervatePlsButtonFrame_Druid_OnMouseDown()</OnMouseDown>
+            <OnMouseUp>InnervatePlsButtonFrame_Druid_OnMouseUp()</OnMouseUp>
         </Scripts>
     </Frame>
 </Ui>
