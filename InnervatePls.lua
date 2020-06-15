@@ -4,22 +4,29 @@ SLASH_INNERVATEPLSTEST1 = "/innervatepls"
 SLASH_INNERVATEPLSTEST2 = "/ipls"
 SlashCmdList["INNERVATEPLSTEST"] = function(msg)
    if msg == "lock" then
-      InnervatePlsButtonFrame_Resize_Button:Hide()
-      InnervatePlsButtonFrame:SetBackdrop(nil)
-      InnervatePls_Frame_Locked = true
+      if InnervatePls_Frame_Locked == true then
+         print("InnervatePls is already locked, type '/ipls unlock' to unlock the frames")
+      else
+         InnervatePlsButtonFrame_Resize_Button:Hide()
+         InnervatePlsButtonFrame:SetBackdrop(nil)
+         InnervatePls_Frame_Locked = true
+      end
    elseif msg == "unlock" then
-      InnervatePlsButtonFrame_Resize_Button:Show()
-      InnervatePls_Frame_Locked = false
-      InnervatePlsButtonFrame:SetBackdrop( { 
-         bgFile = [[Interface\TutorialFrame\TutorialFrameBackground]], 
-         edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]], tile = true, tileSize = 16, edgeSize = 16, 
-         insets = { left = 4, right = 3, top = 4, bottom = 3 }
-       });
+      if InnervatePls_Frame_Locked == true then
+         InnervatePlsButtonFrame_Resize_Button:Show()
+         InnervatePls_Frame_Locked = false
+         InnervatePlsButtonFrame:SetBackdrop( { 
+            bgFile = [[Interface\TutorialFrame\TutorialFrameBackground]], 
+            edgeFile = [[Interface\Tooltips\UI-Tooltip-Border]], tile = true, tileSize = 16, edgeSize = 16, 
+            insets = { left = 4, right = 3, top = 4, bottom = 3 }
+         });
+      else
+         print("InnervatePls is already unlocked, type '/ipls lock' to lock the frames")
+      end
    elseif msg == "toggle" then
       if InnervatePls_Frame_Hidden == false then 
          InnervatePlsButtonFrame:Hide() 
          InnervatePls_Frame_Hidden = true
-         
       else 
          InnervatePlsButtonFrame:Show() 
          InnervatePls_Frame_Hidden = false
@@ -28,14 +35,14 @@ SlashCmdList["INNERVATEPLSTEST"] = function(msg)
    else
       print("|cff00ccffInnervatePls Version 1.0 Loaded|r")
       print("|cffff0000This is an early test version|r")
-      print("Type '/ipls lock' to lock the button")
-      print("Type '/ipls unlock' to unlock the button")
+      print("Type '/ipls lock' to lock the frames")
+      print("Type '/ipls unlock' to unlock the frames")
       print("Type '/ipls toggle' to hide/show the button")
    end
 end
 
 function InnervatePls_ButtonFrame_OnMouseDown() 
-   if  InnervatePls_Frame_Locked == false then InnervatePlsButtonFrame:StartMoving() end
+   if InnervatePls_Frame_Locked == false then InnervatePlsButtonFrame:StartMoving() end
 end
 
 function InnervatePls_ButtonFrame_OnMouseUp()
@@ -81,7 +88,7 @@ function InnervatePls_ButtonFrame_OnEvent(event, arg1, arg2, arg3, arg4, arg5, a
       message = arg2
       from = arg4
 
-      -- Remove servername from target
+      -- Remove servername from receiver
       if string.find(from, "-") then
          from = string.sub(from, 0, string.find(arg4, "-")-1);
       end

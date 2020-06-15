@@ -1,6 +1,7 @@
 <Ui>
 
-    <Frame  name = "InnervatePlsButtonFrame" parent="UIParent"
+    <Frame  name = "InnervatePlsButtonFrame" 
+            parent="UIParent"
             enableMouse="true"
             movable="true"
             resizable="true">
